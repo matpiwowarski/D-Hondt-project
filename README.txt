@@ -1,0 +1,3 @@
+Treœæ zadania:
+Napisaæ program wyznaczaj¹cy liczbê mandatów uzyskanych w wyborach do parlamentu. W ordynacji wyborczej wykorzystywana jest metoda D'Hondta. Wyniki g³osowania przekazywane w jednej linii pliku wejœciowego: pierwsz¹ wartoœci¹ jest liczba miejsc w parlamencie, a nastêpnie podawane s¹ rozdzielone spacjami liczby g³osów uzyskane przez partie. W pliku mo¿e znajdowaæ siê dowolna liczba przypadków (ró¿ne parlamenty, ró¿ne liczby g³osów). Mo¿na przyj¹æ, ¿e liczba partii nie jest wiêksza od pewnego MAX. Do pliku wyjœciowego zapisywane s¹ liczby mandatów uzyskanych w wyborach. Nazwa pliku wejœciowego podawana jest po prze³¹czniku -i, wyjœciowego po -o. Przyk³adowe wywo³anie programu:
+program.exe -i wejscie -o wyjscie
