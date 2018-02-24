@@ -1,0 +1,6 @@
+ Podzial mandatow:
+ partia 1: 2
+ partia 2: 2
+ partia 3: 2
+ partia 4: 1
+ partia 5: 0

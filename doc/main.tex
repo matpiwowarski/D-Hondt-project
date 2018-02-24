@@ -1,0 +1,510 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                            %
+%   W Z O R Z E C   S P R A W O Z D A N I A  %
+%                                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage[utf8]{inputenc}                                      
+\usepackage[OT4]{fontenc}      
+%\usepackage[T1]{fontenc}                            
+\usepackage[polish]{babel}                           
+\selectlanguage{polish}
+\usepackage{indentfirst} 
+\usepackage[dvips]{graphicx}
+\usepackage{tabularx}
+\usepackage{color}
+\usepackage{hyperref} 
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{ifpdf}
+\usepackage{mathtext} % polskie znaki w trybie matematycznym
+%\makeindex  % utworzenie skorowidza (w dokumencie pdf)
+\usepackage{lmodern}
+%\usepackage[osf]{libertine}
+\usepackage{filecontents}
+
+
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+
+\newcounter{nextYear}
+\setcounter{nextYear}{\the\year}
+\stepcounter{nextYear}
+
+% rozszerzenie nieco strony
+%\setlength{\topmargin}{-1cm} \setlength{\textheight}{24.5cm}
+%\setlength{\textwidth}{17cm} \addtolength{\hoffset}{-1.5cm}
+%\setlength{\parindent}{0.5cm} \setlength{\footskip}{2cm}
+%\linespread{1.2} % odstep pomiedzy wierszami
+
+\ifpdf
+\DeclareGraphicsRule{*}{mps}{*}{}
+\fi
+
+
+\newcommand{\tl}[1]{\textbf{#1}} 
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{} % usuwanie bieżących ustawień
+\fancyhead[LE,RO]{\small\bfseries\thepage}
+\fancyhead[LO]{\small\bfseries\rightmark}
+\fancyhead[RE]{\small\bfseries\leftmark}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\headheight}{0.5pt} % pionowy odstęp na kreskę
+\fancypagestyle{plain}{%
+\fancyhead{} % usuń p. górne na stronach pozbawionych numeracji
+\renewcommand{\headrulewidth}{0pt} % pozioma kreska
+}
+
+% ustawienia listingu programow
+%\lstset{	language=C++, 
+%        	numbers=left, 
+%        	numberstyle=\tiny, 
+%        	stepnumber=1, 
+%        	numbersep=5pt,
+%		  	stringstyle=\ttfamily,
+%			showstringspaces=false,
+% 			tabsize=4
+%		}
+
+\lstset{%
+language=C++,%
+commentstyle=\textit,%
+identifierstyle=\textsf,%
+keywordstyle=\sffamily\bfseries, %
+%captionpos=b,%
+tabsize=3,%
+frame=lines,%
+numbers=left,%
+numberstyle=\tiny,%
+numbersep=5pt,%
+breaklines=true,%
+morekeywords={pWezel,Wezel,string,ref,params_result,string},%
+escapeinside={(*@}{@*)},%
+%basicstyle=\footnotesize,%
+%keywords={double,int,for,if,return,vector,matrix,void,public,class,string,%
+%float,sizeof,char,FILE,while,do,const}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% mala zmiana sposobu wyswietlania notek bocznych
+\let\oldmarginpar\marginpar
+\renewcommand\marginpar[1]{%
+  {\linespread{0.85}\normalfont\scriptsize%
+%   \oldmarginpar[\vspace{-1.5ex}\raggedleft\scriptsize\color{black}\textsf{#1}]%    left pages
+%                {\vspace{-1.5ex}\raggedright\scriptsize\color{black}\textsf{#1}}% right pades
+\oldmarginpar[\hspace{1cm}\begin{minipage}{3cm}\raggedleft\scriptsize\color{black}\textsf{#1}\end{minipage}]%    left pages
+{\hspace{0cm}\begin{minipage}{3cm}\raggedright\scriptsize\color{black}\textsf{#1}\end{minipage}}% right pages
+}%
+}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+
+\begin{document}
+\frenchspacing
+\thispagestyle{empty}
+\begin{center}
+{\Large\sf Politechnika Śląska w Gliwicach   % Alma Mater
+
+Wydział Automatyki, Elektroniki i Informatyki
+
+}
+
+\vfill
+
+%\includegraphics[width=0.15\textwidth]{polsl.pdf}
+
+\vfill\vfill
+
+{\Huge\sffamily\bfseries Podstawy Programowania Komputerów} \\ % tu podać nazwę przedmiotu
+
+\vfill\vfill
+
+{\LARGE\sf D'Hondt}  % a tu temat laborki :-)
+
+
+\vfill \vfill\vfill\vfill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{tabular}{ll}
+\toprule
+	autor                                                  & Mateusz Piwowarski          \\
+	prowadzący                                             & dr inż. Krzysztof Simiński       \\
+	rok akademicki                                         & \the\year/\arabic{nextYear} \\
+	kierunek                                               & informatyka                 \\
+	rodzaj studiów                                         & SSI                         \\
+	semestr                                                & 1                           \\
+	termin laboratorium / ćwiczeń                          & wtorek, 13:45 -- 15:15      \\
+	grupa                                                  & 3                           \\
+	sekcja                                                 & 7                           \\
+	termin oddania sprawozdania                            & \the\year-12-01             \\
+	data oddania sprawozdania                              & \the\year-12-01             \\
+\bottomrule &  \\
+\end{tabular}
+
+\end{center}
+%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Treść zadania}
+Napisać program wyznaczający liczbę mandatów uzyskanych w wyborach do parlamentu. W ordynacji wyborczej wykorzystywana jest metoda D'Hondta. Wyniki głosowania przekazywane w jednej linii pliku wejściowego: pierwszą wartością jest liczba miejsc w parlamencie, a następnie podawane są rozdzielone spacjami liczby głosów uzyskane przez partie. W pliku może znajdować się dowolna liczba przypadków (różne parlamenty, różne liczby głosów). Można przyjąć, że liczba partii nie jest większa od pewnego \texttt{MAX.} Do pliku wyjściowego zapisywane są liczby mandatów uzyskanych w wyborach. Nazwa pliku wejściowego podawana jest po przełączniku \texttt{-i}, wyjściowego po \texttt{-o}. Przykładowe wywołanie programu:
+
+\begin{tabular}{ll}
+\texttt{program.exe -i wejscie -o wyjscie}
+\end{tabular}
+
+Jeżeli nie zostanie podany plik wejściowy, program czyta ze standardowego wejścia. Jeżeli nie zostanie podany plik wyjściowy, program pisze na standardowe wyjście.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Analiza zadania}
+
+Zagadnienie przedstawia problem podziału mandatów w wyborach parlamentarnych korzystając z ilości dostępnych mandatów oraz głosów oddanych na poszczególne partie. Przy podziale mandatów będzie wykorzystywana metoda D'Hondta.
+
+\subsection{Struktury danych}
+
+W programie wykorzystano tablice do przechowywania danych.
+Tablice przechowują informacje o ilości głosów oddanych na partie oraz informacje o ilości przyznanych mandatów dla każdej partii.
+Taka struktura danych umożliwia łatwe przechowywanie danych oraz porównywanie wartości.
+
+\subsection{Algorytmy}
+
+Metoda D'Hondta:
+Program porównuje wielkości ilorazów wyborczych. Iloraz wyborczy przyjmuje wartość według wzoru \eqref{eq:1}. Po porównaniu, przyznaje mandat partii z największym ilorazem wyborczym. Po przyznaniu mandatu, iloraz wyborczy zmniejsza się. Przy przydzielaniu następnego mandatu będą porównywane nowe ilorazy wyborcze. Program wykonuje tyle porównań ile jest możliwych mandatów do podziału.
+Przykład działania algorytmu przedstawia Rysunek 1.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centering
+\begin{equation}
+Iloraz \ wyborczy = 
+\frac{\substack{ilość\ głosów\ uzyskanych\ w\ wyborach}}
+{\substack{ilość\ mandatów\ uzyskanych\ +\ 1}}
+\label{eq:1}
+\end{equation}
+
+\includegraphics[width=0.9\textwidth]{algorytm.jpg}
+Rysunek 1: Przykład podziału 8 mandatów metodą D'Hondta dla partii, które otrzymały kolejno: 720, 300, 480 głosów.
+
+\section{Specyfikacja zewnętrzna}
+\label{sec:sp:zewnetrzna}
+Program jest uruchamiany z linii poleceń. 
+Należy przekazać do programu nazwy plików (bez rozszerzenia): wejściowego i wyjściowego po odpowiednich przełącznikach (odpowiednio: \texttt{-i} dla pliku wejściowego i \texttt{-o} dla pliku wyjściowego) np.
+\begin{verbatim}
+program -i wejscie -o wyjscie
+program -o wyjscie -i wejscie
+\end{verbatim}
+Przełączniki mogą być podane w dowolnej kolejności. Uruchomienie programu z parametrem \texttt{-h} powoduje wyświetlenie krótkiej pomocy. Pomoc również jest wyświetlania w wyniku podania niepoprawnych danych.
+\begin{verbatim}
+program -h
+\end{verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Jeżeli nie zostanie podany przełącznik \texttt{-i} przy uruchomieniu programu lub zostanie podana nieprawidłowa nazwa pliku, dane potrzebne do wykonania programu będą pobierane z wejścia standardowego. Otrzymamy komunikat:
+\begin{verbatim}
+Nie podano lub nie znaleziono pliku wejsciowego.
+\end{verbatim}
+Następnie program będzie wyświetlał instrukcje jakie dane należy podać:
+\begin{verbatim}
+ Podaj liczbe partii (max. 100).
+ Podaj liczbe mandatow.
+ Podaj liczbe glosow na partie 1
+ Podaj liczbe glosow na partie 2
+ Podaj liczbe glosow na partie 3
+ Podaj liczbe glosow na partie n
+\end{verbatim}
+Gdzie \texttt{n} w ostatnim z powyższych komunikatów oznacza numer kolejnych partii biorących udział w wyborach parlamentarnych.
+
+Jeżeli nie zostanie podany przełącznik \texttt{-o} przy uruchamianiu programu, wynik programu będzie wyświetlany na wyjście standardowe:
+\begin{verbatim}
+ Podzial mandatow:
+ partia 1: 4
+ partia 2: 1
+ partia 3: 3
+ partia n: k
+\end{verbatim}
+Gdzie \texttt{n} w ostatnim z powyższych komunikatów oznacza numer kolejnych partii biorących udział w wyborach parlamentarnych. \texttt{k} oznacza ilość mandatów przyznanych dla partii \texttt{n}. Zapis wyniku do pliku wyjścia wygląda podobnie jak w przypadku wyświetlania wyniku na wyjście standardowe.
+\newline
+
+Przy wykorzystywaniu danych z pliku wejściowego:
+Pierwszą wartością jest liczba miejsc w parlamencie, a następnie liczby głosów uzyskane przez partie. Każda wartość powinna być oddzielona spacją oraz powinna być liczbą naturalną. Liczba podanych partii nie powinna przekraczać 100. Podanie niepoprawnych danych w pliku wywołuje komiunikat oraz kończy program: 
+\begin{verbatim}
+Zle zapisane dane w pliku wejscia.
+\end{verbatim}
+Podanie niepoprawnych danych w standardowym wejściu wywołuje komunikat oraz kończy program: 
+\begin{verbatim}
+Wpisales bledne dane.
+\end{verbatim}
+Podanie niepoprawnych danych wyświetli również instrukcję dla użytkownika.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Specyfikacja wewnętrzna}\label{sec:sp-wew}
+Program został zrealizowany zgodnie z paradygmatem strukturalnym.  
+W programie rozdzielono interfejs (komunikację z użytkownikiem) od logiki aplikacji (podziału mandatów).
+
+\subsection{Typy zdefiniowane w programie}
+
+\begin{lstlisting}
+const int MAX = 100;
+\end{lstlisting}
+Typ ten służy do określenia największej możliwej ilości partii. Wartość \lstinline|MAX| jest stała przez cały czas działania programu. Jest wykorzystywana w funkcjach: \begin{verbatim} Pobieranie_danych , Podzial_mandatow \end{verbatim}
+oraz określa ilość elementów tablic: \begin{verbatim} glosy[MAX] , iloscpartii[MAX]\end{verbatim}
+
+Zdefiniowano także typ tablic, które przechowują dane: ilość głosów otrzymanych przez każdą z partii oraz ilość mandatów uzyskanych przez partie. Wartości tablic są liczbami naturalnymi.
+\begin{lstlisting}
+unsigned int glosy[MAX];
+unsigned int mandaty[MAX];
+\end{lstlisting}
+Typ ten jest wykorzystywany przez funkcje: \begin{verbatim} Wyzerowanie_mandatow , Wartosci_z_konsoli ,
+ Pobieranie_danych , Podzial_mandatow , Wynik_konsola , Wynik \end{verbatim}
+
+Zdefiniowano również typ zmiennych, które przechowują dane: ilość partii biorących udział w wyborach parlamentarnych oraz ilość mandatów do podziału. Wartości zmiennych są liczbami naturalnymi. 
+\begin{lstlisting}
+unsigned int iloscpartii;
+unsigned int iloscmandatow;
+\end{lstlisting}
+
+Typ ten jest wykorzystywany przez funkcje: \begin{verbatim} Poprawnosc_danych , Wyzerowanie_mandatow , Wartosci_z_konsoli,
+ Pobieranie_danych , Wynik_konsola , Wynik \end{verbatim}
+
+Zdefiniowano także typ klasy \lstinline|string|, które przechowują nazwy pliku wejścia i wyjścia.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{lstlisting}
+string nazwa_pliku_wejscia;
+string nazwa_pliku_wyjscia;
+\end{lstlisting}
+Typ ten jest wykorzystywany przez funkcje: \begin{verbatim} Odczytaj_argumenty , Pobieranie_danych , Wynik \end{verbatim}
+
+
+\subsection{Ogólna struktura programu}
+
+W funkcji głównej wywołana jest funkcja 
+\begin{lstlisting}
+void Odczytaj_argumenty(int ile, char ** argumenty,  string & szInput, string & szOutput)
+\end{lstlisting}
+Funkcja ta sprawdza, czy program został wywołany wraz z użyciem przełączników \texttt{-i}, \texttt{-o}, \texttt{-h}. Jeżeli odpowiednie przełączniki zostały wykorzystane, funkcja w zmiennych szInput i szOutput przechowa nazwy pliku wejścia oraz wyjścia. Gdy program został wywołany z użyciem parametru \texttt{-h} Funkcja wywołuje funkcję:
+
+\begin{lstlisting}
+void Pomoc();
+\end{lstlisting} 
+Funkcja ta wyświetla instrukcję korzystania z programu.
+
+Następnie sprawdzana jest wartość zwracana funkcji: 
+\begin{lstlisting}
+bool Pobieranie_danych(string wejscie, const int MAX, unsigned int glosy[ ], unsigned int & iloscpartii, unsigned int & iloscmandatow)
+\end{lstlisting}
+Funkcja ta otwiera i pobiera z pliku wejścia dane (plik umieszczony w katalogu zewnętrzynm. \texttt{dat}). Zostają przechowane dane w zmiennej i tablicy: \texttt{iloscmandatow}, \texttt{glosy[ ]}. Domyślnie zwracana jest wartość \texttt{True}. Jeżeli wystąpił błąd w danych odczytywanych z pliku wejścia zwracana jest wartość \texttt{False}. Gdy plik wejściowy nie istnieje lub jego nazwa nie jest podana, zostaje wywołana funkcja:
+
+\begin{lstlisting}
+bool Wartosci_z_konsoli(unsigned int glosy[ ], unsigned int & iloscpartii, unsigned int & iloscmandatow)
+\end{lstlisting} 
+
+Funkcja pobiera dane z standardowego wejścia. Zostają przechowane dane w zmiennych i tablicy: \texttt{iloscpartii}, \texttt{iloscmandatow}, \texttt{glosy[ ]}. Domyślnie zwracana jest wartość \texttt{True}. Po otrzymaniu każdej wartości zostaje uruchomiona funkcja \begin{verbatim} Poprawnosc_danych \end{verbatim}, która sprawdza czy dane podane przez użytkownika są poprawne. Jeżeli nie są, zostaje zwrócona wartość \texttt{False}.
+
+Wywołana wcześniej funkcja
+\begin{lstlisting}
+void Poprawnosc_danych(bool & poprawne_dane, const unsigned int iloscpartii)
+\end{lstlisting} 
+sprawdza poprawność wpisanych wartości przez użytkownika. Jeżeli wartości są niepoprawne ustawia wartość \texttt{niepoprawnedane} na \texttt{False} oraz wywołuje funkcję \texttt{Pomoc()}.
+\newline
+
+Jeżeli w funkcji głównej funkcja 
+\begin{verbatim}
+Pobieranie_danych
+\end{verbatim}
+zwróciła wartość False program zostaje zakończony. W przypadku wartości True zostaje wywołana funkcja
+
+\begin{lstlisting}
+void Wyzerowanie_mandatow(unsigned int mandaty[ ], unsigned int iloscpartii)
+\end{lstlisting}
+Funkcja ustawia wszystkie wartosci tablicy \texttt{mandaty[ ]} na 0.
+\newline
+
+Następną wywołaną funkcją w funkcji głównej jest
+
+\begin{lstlisting}
+void Podzial_mandatow(const int MAX, unsigned int mandaty [ ], unsigned int glosy [ ], unsigned int iloscpartii, unsigned int iloscmandatow)
+\end{lstlisting}
+Funkcja zmienia wartości tablicy mandatów dla każdej partii. 
+Tworzy kopię tablicy głosów, następnie porównując każdą z wartości przyznaje mandat dla tego samego miejsca w tablicy mandatów, gdzie była najwyższa wartość w tablicy kopii głosów. Po przyznaniu mandatu, w tym samym miejscu w kopii tablicy pojawia się nowa wartość, która jest ustawiana przez funkcję
+
+\begin{lstlisting}
+double Iloraz_wyborczy(unsigned int glosy, unsigned int mandaty)
+\end{lstlisting}
+Funkcja zwraca nową wartość w kopii tablicy głosów, która zdobyła mandat.
+Wartość zwracana jest zależna od wartości w tablicy głosów dla danej partii oraz ilość mandatów która jest im przyznana.
+\newline
+
+Następnie w funkcji głównej zostaje wywołana funkcja
+
+\begin{lstlisting}
+void Wynik(string wyjscie, unsigned int iloscpartii, unsigned int mandaty[ ])
+\end{lstlisting}
+
+Funkcja sprawdza czy nazwa pliku wyjścia jest pusta. Jeżeli nazwa pliku wyjścia nie jest pusta, zostaje utworzony plik tekstowy w zewnętrznym katalogu \texttt{dat} oraz zostaje tam zapisany wynik podziału mandatów. Funkcja korzysta z wartości znajdujących się w tablicy \texttt{mandaty}. Jeżeli nazwa pliku wyjścia jest pusta, zostaje wywołana funkcja
+
+\begin{lstlisting}
+void Wynik_konsola(unsigned int mandaty[ ], unsigned int iloscpartii)
+\end{lstlisting}
+
+Funkcja wyswietla w standardowym wyjściu wynik podziału mandatów. Funkcja korzysta z wartości znajdujących się w tablicy \texttt{mandaty}.
+
+\subsection{Szczegółowy opis implementacji funkcji}
+
+%%%%%%%%%%%%%%%%%%%%%%1
+\begin{lstlisting}
+void Odczytaj_argumenty(int ile, char ** argumenty,  string & szInput, string & szOutput)
+\end{lstlisting}
+Funkcja ta sprawdza, czy program został wywołany wraz z użyciem przełączników \texttt{-i}, \texttt{-o}, \texttt{-h}.
+Parametry funkcji: \newline
+\texttt{ile} -- ilość parametrów wywołanych w wierszu linii poleceń. 
+\texttt{argumenty} -- tablica parametrów wywołanych w wierszu linii poleceń. \texttt{szInput} -- zmienna typu string w której znajduje się nazwa pliku wejścia. \texttt{szOutput} -- zmienna typu string w której znajduje się nazwa pliku wyjścia \newline
+
+Wewnatrz funkcji są zadeklarowane zmienne typu \lstinline|string| przechowujące nazwę przełączników:
+\newline \texttt{ETYKIETAINPUT("-i")} -- przechowuje przełącznik \texttt{-i};
+\newline \texttt{ETYKIETOUTPUT("-o")} -- przechowuje przełącznik \texttt{-o};
+\newline \texttt{ETYKIETAINPUT("-h")} -- przechowuje przełącznik \texttt{-h};
+\newline
+Funkcja używa pętli sprawdzając każdy argument w wierszu linii poleceń. W tym celu jest stworzona zmienna \texttt{arg}, która jest aktualnym elementem argumentów w pętli. Wewnątrz pętli zmienna \texttt{arg} jest porównywana do każdej zmiennej która przechowuje przełącznik. Pętla sprawdza argumenty od miejsca pierwszego tablicy, ponieważ miejscem zerowym jest nazwa programu, która nie może być przełącznikiem. Ilość wykonanych pętli zależy od zmiennej \texttt{ile}, która jest parametrem funkcji. Jeżeli zmienna \texttt{arg} ma taką samą wartość jak wartość zmiennej \texttt{ETYKIETAINPUT}: wartość następnego argumentu w wierszu linii poleceń jest zapisana do zmiennej \texttt{szInput}. Jeżeli zmienna \texttt{arg} ma taką samą wartość jak wartość zmiennej \texttt{ETYKIETAOUTPUT}: wartość następnego argumentu w wierszu linii poleceń jest zapisana do zmiennej \texttt{szOutput}. Jeżeli zmienna \texttt{arg} ma taką samą wartość jak wartość zmiennej \texttt{ETYKIETAHELP}: wywoływana jest funkcja \texttt{Pomoc}.
+
+\begin{lstlisting}
+void Pomoc();
+\end{lstlisting} 
+Funkcja wyświetla instrukcję korzystania z programu. W instrukcji jest opisane w jaki sposób powinien być wywołany program oraz jakie dane powinny być zamieszczone w pliku wejścia lub w danych podanych przez użytkownika.
+
+\begin{lstlisting}
+bool Pobieranie_danych(string wejscie, const int MAX, unsigned int glosy[ ], unsigned int & iloscpartii, unsigned int & iloscmandatow)
+\end{lstlisting}
+
+Parametry funkcji: \newline
+\texttt{wejscie} -- zmienna typu string, w której znajduje się nazwa pliku wejścia. \texttt{MAX} -- zmienna określająca maksymalną ilość partii biorących udział w wyborach parlamentarnych. \texttt{glosy [ ]} -- tablica przechowująca ilości głosów otrzymanych przez partie. \texttt{iloscpartii} -- zmienna przechowująca ilość partii biorących udział w wyborach parlamentarnych. \texttt{iloscmandatow} -- zmienna przechowująca ilość mandatów, które są podzielone w wyborach parlamentarnych \newline
+
+Funkcja zwraca informacje czy pobrane wartości z pliku wejścia lub z standardowego wejścia są poprawne. \texttt{True} -- wartości poprawne \texttt{False} -- wartości niepoprawne. Informacja o poprawności danych ( wartość zwracana) jest przypisana zmiennej \texttt{poprawnedane}  \newline
+
+Funkcja tworzy strumień wejścia do pliku tekstowego w katalogu zewnętrznym \texttt{dat} wykorzystując nazwę pliku w zmiennej \texttt{wejscie}. Następnie funkcja sprawdza czy plik istnieje oraz czy jest możliwy dostęp. Gdy dostęp jest możliwy, funkcja zapisuje dane z pliku do zmiennej \texttt{iloscmandatow} oraz do tablicy \texttt{glosy[ ]}. Zapis danych w tablicy jest wywoływany pętlą która się kończy gdy dojdziemy do końca pliku lub gdy pobierzemy ilość głosów dla 100 partii. Jeżeli dane w pliku są zapisane niepoprawnie, funkcja zmienia wartość \texttt{poprawnedane} na \texttt{False}, wyświetla komunikat oraz wywołuje funkcję \texttt{Pomoc()}. Po wykonaniu wszystkich operacji na otwartym pliku, funkcja zamyka plik.
+\newline
+Jeżeli funkcja nie znajdzie pliku wejściowego, sprawdza wartość zwracaną funkcji \texttt{Wartosc} z konsoli. Jeżeli funkcja \texttt{Wartosc} z konsoli zwraca wartość \texttt{False}, zmienna \texttt{poprawnedane} zmieniają swoją wartość na \texttt{False}.
+
+\begin{lstlisting}
+bool Wartosci_z_konsoli(unsigned int glosy[ ], unsigned int & iloscpartii, unsigned int & iloscmandatow)
+\end{lstlisting} 
+Parametry funkcji:
+\newline \texttt{glosy [ ]} -- tablica przechowująca ilości głosów otrzymanych przez partie. \texttt{iloscpartii} -- zmienna przechowująca ilość partii biorących udział w wyborach parlamentarnych. 
+\texttt{iloscmandatow} -- zmienna przechowująca ilość mandatów, które są podzielone w wyborach parlamentarnych \newline
+
+Funkcja zwraca informacje czy pobrane wartości z standardowego wejścia są poprawne. \texttt{True} -- wartości poprawne \texttt{False} -- wartości niepoprawne. Informacja o poprawności danych ( wartość zwracana) jest przypisana zmiennej \texttt{poprawnedane}. Domyślnie zmienna \texttt{poprawnedane} przyjmuje wartość \texttt{True} \newline
+
+Funkcja wyświetla komunikaty, jakie wartości powinien wprowadzić użytkownik.
+Po każdym pobraniu wartości od użytkownika, program wywołuje funkcje Poprawnosc danych, która sprawdza czy wartości są poprawne. 
+
+Funkcja przypisuje dane podane przez użytkownika do zmiennych \texttt{iloscpartii}, \texttt{iloscmandatow} oraz do tablicy \texttt{glosy}.    
+\begin{lstlisting}
+void Poprawnosc_danych(bool & poprawne_dane, const unsigned int iloscpartii)
+\end{lstlisting} 
+
+Parametry funkcji:
+\newline \texttt{poprawne dane} -- zmienna przechowująca informacje o poprawności danych
+\newline \texttt{iloscpartii} -- zmienna przechowująca ilość partii biorących udział w wyborach parlamentarnych 
+
+Funkcja sprawdza czy wartości wprowadzone przez użytkownika są poprawne oraz czy użytkownik nie podał większej ilości partii niż 100. Jeżeli dane wprowadzone są niepoprawne, funkcja wyświetla komunikat, zmienia wartość zmiennej \texttt{poprawne dane} na \texttt{False} oraz wywołuje funkcję \texttt{Pomoc()}
+
+\begin{lstlisting}
+void Wyzerowanie_mandatow(unsigned int mandaty[ ], unsigned int iloscpartii)
+\end{lstlisting}
+
+Parametry funkcji:
+\newline \texttt{mandaty [ ]} -- tablica przechowująca dane o ilości otrzymanych mandatów przez partie
+\newline \texttt{iloscpartii} -- zmienna przechowująca ilość partii biorących udział w wyborach parlamentarnych 
+
+Funkcja wywołuje pętlę która ustawia liczbę wszystkich mandatów otrzymanych przez partię na 0. Ilość powtórzeń pętli jest zależna od wartości zmiennej \texttt{iloscpartii}.
+
+\begin{lstlisting}
+void Podzial_mandatow(const int MAX, unsigned int mandaty [ ], unsigned int glosy [ ], unsigned int iloscpartii, unsigned int iloscmandatow)
+\end{lstlisting}
+Parametry funkcji: \newline
+\texttt{MAX} -- zmienna określająca maksymalną ilość partii biorących udział w wyborach parlamentarnych
+\newline \texttt{mandaty [ ]} -- tablica przechowująca dane o ilości otrzymanych mandatów przez partie
+\newline \texttt{glosy [ ]} -- tablica przechowująca ilości głosów otrzymanych przez partie
+\newline \texttt{iloscpartii} -- zmienna przechowująca ilość partii biorących udział w wyborach parlamentarnych 
+\texttt{iloscmandatow} -- zmienna przechowująca ilość mandatów, które są podzielone w wyborach parlamentarnych \newline
+
+Funkcja tworzy tablicę \texttt{baza glosow}. Wartości \texttt{baza glosow} zostają ustawione na wartości z tablicy texttt{glosy}. W funkcji zostają również stworzone zmienne texttt{miejscemax} oraz texttt{maks}. Te zmienne pomagają w porównywaniu ilorazów wyborczych w \texttt{baza glosow}. texttt{miejscemax} przechowuje miejsce tablicy w ktorej jest najwiekszy iloraz wyborczy a texttt{maks} przechowuje najwyższą wartość ilorazów wyborczych. Przyjmują kolejno wartości 0 oraz -1 aby pierwszy element porównywany jednocześnie był miejscem tablicy w którym znajduje się największy iloraz wyborczy i którego wartość ilorazu wyborczego była najwyższa.
+
+Po porównaniu każdego elementu tablicy texttt{baza glosow}, w miejscu gdzie była największa wartość ilorazu wyborczego w tym samym miejscu tablicy texttt{mandaty} zwiększa się wartość o 1. Oznacza to przyznanie jednego mandatu dla partii o najwyższym ilorazie wyborczym. Po przyznaniu mandatu, w miejscu texttt{miejscemax} tablicy texttt{baza glosow} przypisujemy nową wartość zwracaną przez funkcję texttt{Iloraz wyborczy}. Procedura przypisania mandatu się powtarza, aż nie zostaną wyznaczone wszystkie mandaty dla partii.    
+
+
+\begin{lstlisting}
+double Iloraz_wyborczy(unsigned int glosy, unsigned int mandaty)
+\end{lstlisting}
+Parametry funkcji: \newline
+\texttt{glosy} -- zmienna określająca ilość głosów otrzymanych przez partię wyborach
+\texttt{mandaty} -- zmienna określająca ilość mandatów otrzymanych przez partię
+
+Funkcja zwraca nową wartość ilorazu wyborczego partii, która zdobyła mandat.
+Wartość zwracana jest zależna od wartości w tablicy głosów dla danej partii oraz ilość mandatów która jest im przyznana.
+
+\begin{lstlisting}
+void Wynik(string wyjscie, unsigned int iloscpartii, unsigned int mandaty[ ])
+\end{lstlisting}
+Parametry funkcji: \newline
+\texttt{wyjscie} -- zmienna typu string, w której znajduje się nazwa pliku wyjscia\newline
+\texttt{iloscpartii} -- zmienna przechowująca ilość partii biorących udział w wyborach parlamentarnych 
+\newline \texttt{mandaty [ ]} -- tablica przechowująca dane o ilości otrzymanych mandatów przez partie \newline
+
+Funkcja sprawdza czy zmienna \texttt{wyjscie} jest pusta. Jeżeli jest pusta, zostaje wywołana funkcja \texttt{Wynik konsola}. Jeżeli jest inaczej, funkcja tworzy strumień wyjścia do pliku tekstowego w katalogu zewnętrznym \texttt{dat} wykorzystując nazwę pliku w zmiennej \texttt{wyjscie}. Następnie zostaje zapisany wynik w pliku tekstowym korzystając z danych przechowanych w tablicy 
+\texttt{mandaty}. Wynik ukazuje kolejne partie wraz z ilością uzyskanych mandatów. Rezultat dla każdej partii jest zapisany jeden pod drugim.
+Po zapisaniu wyniku w pliku wyjściowym, funkcja zamyka plik.
+
+\begin{lstlisting}
+void Wynik_konsola(unsigned int mandaty[ ], unsigned int iloscpartii)
+\end{lstlisting}
+Parametry funkcji: \newline
+\texttt{mandaty [ ]} -- tablica przechowująca dane o ilości otrzymanych mandatów przez partie \newline
+\texttt{iloscpartii} -- zmienna przechowująca ilość partii biorących udział w wyborach parlamentarnych \newline
+
+Funkcja wyswietla w standardowym wyjściu wynik podziału mandatów. Funkcja korzysta z wartości znajdujących się w tablicy \texttt{mandaty}. Wynik przedstawia kolejnne partie wraz z ilością uzyskanych mandatów. Rezultat dla każdej z partii jest zapisany jeden pod drugim.
+
+
+\section{Testowanie}
+
+Program został przetestowany na różnego rodzaju plikach. Pliki niepoprawne (niezawierające liczb, zawierające liczby zmiennoprzecinkowe, liczby ujemne oraz znaki, które nie są liczbami.) powodują zgłoszenie błędu. Plik pusty również powoduje zgłoszenie błędu. W pliku \texttt{zle1.txt} znajdują się litery zamiast liczb. Plik \texttt{zle2.txt} przechowuje wartości ujemne. W pliku \texttt{zle3.txt} znajdują się liczby zmiennoprzecinkowe. 
+Program został sprawdzony pod kątem wycieków pamięci. Plik \texttt{zle4.txt} jest pustym plikiem.
+
+Pliki poprawne przechowują poprawne dane. Pliki, w którym znajdują się dodatkowe znaki białe między wartościami nie powodują zgłoszenia błędu przez program. Trywialny wynik otrzymujemy po wczytaniu pliku \texttt{wejscie.txt} lub \texttt{wejscie1.txt}, ponieważ przechowują proste dane zapisane w poprawny sposób. 
+
+W zbiorach testowych również pojawiły się pliki poprawne, ale nietypowe.
+Plik \texttt{wejscie2.txt} nie powoduje zgłoszenia błędu, mimo większych odstępów między danymi. Plik \texttt{wejscie3.txt} przechowuje duże wartości. Podzielenie mandatów dla danych w pliku \texttt{wejscie3.txt} mogłoby stwarzać problemy lub zajmować sporo czasu, jednak program zapisuje poprawne dane.   
+Metoda D'Hondta nie przewiduje rozwiązania dla przypadku, w którym partie otrzymały jednakową ilość głosów. Program w takiej sytuacji przydziela mandat partii, która jest wyżej na liście. Przykład takiego rozwiązania otrzymamy przy wykorzystaniu pliku \texttt{wejscie4.txt}. 
+
+Przykład wyniku dla pliku poprawnego:
+
+\includegraphics[width=0.3\textwidth]{wynik.jpg}
+
+Uruchomienie programu z wykorzystaniem pliku niepoprawnego wyświetla komunikat: \texttt{Zle zapisane dane w pliku wejscia.} oraz wyświetla instrukcję obsługi programu.
+
+
+\section{Wnioski}
+
+Program do podziału mandatów metodą D'Hondta jest programem prostym, chociaż wymaga zaznajomienia się z teorią Metody D'Hondta. Najbardziej wymagające okazało się zapobieganie przed niepoprawnymi danymi. Realizacja projektu nauczyła podstawowych funkcji przy obsługach plików oraz praktycznego pisania funkcji, tak aby kod był czytelny a funkcja nie zajmowała dużej ilości kodu. 
+
+
+
+%\begin{figure}[t]
+%\centering
+%\includegraphics{graf/rysunek.1}
+%\caption{Opis rysunku znajduje się pod nim.}
+%\label{fig:rysunek}
+%\end{figure}
+
+\end{document}
+% Koniec wieńczy dzieło.
